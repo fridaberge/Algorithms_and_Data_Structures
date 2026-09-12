@@ -1,0 +1,57 @@
+/*
+gjorde ganske store endringer da jeg så at midten flyttet seg mens man la til noder i lista
+måtte ta hensyn til når man la i en liste som hadde færre enn tre elementer
+lagde også lista dobbellenket slik at jeg kan finne elementet før og etter midten raskt
+sjekket hver gang middle ble oppdatert om den måtte flyttes, dette utifra hvor manlegger til og 
+om størrelsen på lista er partall eller oddetall. ved partall skal jo det nye elementet legges faktisk
+i midten, og ved oddetall skal elementet ligge på siste av de to midterte
+*/
+
+procedure push_front
+    ny <- new Node(x)
+
+    if start = null then
+        start <- ny
+        middle <- ny
+        end <- ny
+
+    ny.next = start
+    start.next = ny
+
+    size ++
+
+procedure push_back
+    ny <- new Node(x)
+
+    if start = null then
+        start <- ny
+        middle <- ny
+        end <- ny
+
+    end.next = ny
+    end = ny
+
+    size ++
+
+procedure push_middle
+    kopi <- middle.next
+
+    if start = null then
+        start <- ny
+        middle <- ny
+        end <- ny
+        
+    middle.next = ny
+    ny.next = kopi
+
+    size ++
+
+procedure get(i)
+    if i = 0 then
+        return start
+    tmp <- start
+    a <- 0
+    while a < i do
+        tmp = tmp.next
+        a++
+    return tmp

@@ -1,0 +1,53 @@
+-------------------------------------------------- 4B --------------------------------------------------------------------
+
+/////////////////////////////////////////////////////////////////////////////////////////
+antar at metoden som leser input legger input i et array kalt tallListe
+og et tomt array med like lange plasser som tallListe, bare at den er tom fra start
+
+endret fra pseudokode til kode at metoden returnerte en string i stedet for å kun printe,
+begge deler fungerte, men foretrakk at metoden returtnerte lista fordi da er det lettere
+å hente frem og sjekke at elementene ligger der det skal
+//////////////////////////////////////////////////////////////////////////////////////////
+
+input: indeks av første og siste element i lista med input
+output: en ny liste hvor elementene er sortert slik at treet vil bli balansert
+
+//for å starte rekusjon
+omOrganiser(0, tallListe.size-1, tallListe)
+
+Procedure omOrganiser(lav, hoy, tallListe)
+    if lav = hoy then
+        return
+    midt <- (lav+hoy)/2
+    print(tallListe.get(midt))
+    omOrganiser(midt, tallListe.size-1, tallListe)
+    omOrganiser(0, midt, tallListe)
+
+
+------------------------------------------------------ 4C ------------------------------------------------------------------
+
+//////////////////////////////////////////////////////////////////////////////////////////
+måtte justere basistilfellet fordi et heap kan ha lengde 0 uten å være null selv
+fant også ut at poll fjernet første istedet for siste element.
+justerte dette ved å endre slik at det midterste elementet blir lagt til i det største heapet
+og ikke det minste.
+//////////////////////////////////////////////////////////////////////////////////////////
+
+input: et heap med heltall
+output: printe elementene i en sortert rekkefølge     slik at treet vil bli balanseert
+
+Procedure OmOrganiserHeap(H){
+    if H = null then
+        return
+    midt <- (size-1) /2
+    teller <- 0
+    for tall: H do
+        if teller <= midt then
+            lavHeap.offer(tall)
+        else
+            hoyHeap.offer(tall)
+        teller ++
+    print(lavHeap.poll)
+    OmOrganiserHeap(lavHeap)
+    OmOrganiserHeap(hoyHeap)
+}

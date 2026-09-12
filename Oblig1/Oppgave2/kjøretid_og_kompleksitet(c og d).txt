@@ -1,0 +1,21 @@
+c) Verste tilfelle av kjøretidsanalyse (uten begrensning av N):
+    push_back(x), push_front(x), push_middle(x):
+        konstanttid: O(1)
+    fordi: operasjonene kaller på noder med pekere på seg og trenger derfor ikke gå gjennom lista
+
+    get(x):
+        lineærtid: O(n)
+    fordi: hvis get metoden kaller på noe annet enn det første eller siste elementet, går metoden gjennom (nesten) hele lista til den finner elementet
+
+
+
+d) Hvorfor størrelsen på N påvirker kjøretiden:
+    push_back(x), push_front(x), push_middle(x):
+        Operasjonene vil gå i konstanttid fordi det finnes peker til første, midterste og siste node. 
+        Derfor vil ikke operasjonene påvirkes av størrelsen på N (input) og derfor heller ikke lengden av køen (teque).
+
+    get(x):
+        Dersom det ikke er første eller siste node som skal hentes, vil kjøretiden økes lineært med input sin størrelse (N)
+        Dette er fordi metoden ble laget slik at den må lete gjennom alt i lista før den noden x man leter etter.
+        I verste tilfelle må get-metoden derfor lete gjennom hele lista (bortsett fra helt siste node)
+    

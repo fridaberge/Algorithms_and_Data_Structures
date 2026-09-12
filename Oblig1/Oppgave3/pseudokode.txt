@@ -1,0 +1,46 @@
+/*
+antar at det finnes en klasse node med forelder og barnepekere
+og en node kaldt rot (som er roten i treet)
+
+endringer da det ble laget til kode:
+    måtte lagde selve barne-noden og legge til forelder 
+    finnBarn la til roten feil, så jeg lagde en ny metode som erstattet
+    deler av finn barn og hele settRot. Den nye metoden settRot sjekker
+    om det finnes noen barn av en foreldrenode (med samme verdi), dersom 
+    dette ikke er tilfelle må dette være roten.
+    måtte også gjøre om på printSti/finnVei slik at etter en forelder er funnet,
+    vil metoden finne tilsvarende barn i og videre den sin forelder
+*/
+
+Procedure lesInput(linje)
+    kattPlassering = readLine()
+
+    linje(0) = kmd
+    if kmd = -1 then
+        return
+    
+    ny = new Node(kmd)
+    foreldre.add(ny)
+
+    for(verdi: linje):
+        ny.barn.add(verdi)
+
+Procedure settRot():
+    rot = finnBarn(foreldre.get(0))
+
+Procedure finnBarn(x)
+    for(forelder: foreldre):
+        rot = forelder
+        for(barn: forelder):
+            if(barn.verdi = x) then
+                return barn
+    return forelder
+
+
+Procedure finnVei(kattPlassering)
+    utvei = ""
+    if x = rot then:
+        utvei += x.veidi
+        return utvei
+    utvei += x.verdi
+    finnVei(x.forelder)

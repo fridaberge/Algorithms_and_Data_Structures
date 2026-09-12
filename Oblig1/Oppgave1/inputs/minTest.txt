@@ -1,0 +1,4 @@
+5
+insert 1
+contains 1
+size

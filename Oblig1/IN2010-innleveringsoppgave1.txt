@@ -1,0 +1,224 @@
+Oppgave1:
+    a) filnavn: BinaryTreeSet.java
+    b) forskjellen i kjøretid på denne og forrige oblig er at kjøretiden hele tiden halveres (O(log(n))), 
+    siden datastrukturen i denne obligen er et binært tre
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Oppgave2:
+
+
+    a) Pseudokode
+        /*
+        gjorde ganske store endringer da jeg så at midten flyttet seg mens man la til noder i lista
+        måtte ta hensyn til når man la i en liste som hadde færre enn tre elementer
+        lagde også lista dobbellenket slik at jeg kan finne elementet før og etter midten raskt
+        sjekket hver gang middle ble oppdatert om den måtte flyttes, dette utifra hvor manlegger til og 
+        om størrelsen på lista er partall eller oddetall. ved partall skal jo det nye elementet legges faktisk
+        i midten, og ved oddetall skal elementet ligge på siste av de to midterte
+        */
+
+        procedure push_front
+            ny <- new Node(x)
+            if start = null then
+                start <- ny
+                middle <- ny
+                end <- ny
+            ny.next = start
+            start.next = ny
+            size ++
+
+        procedure push_back
+            ny <- new Node(x)
+            if start = null then
+                start <- ny
+                middle <- ny
+                end <- ny
+            end.next = ny
+            end = ny
+            size ++
+
+        procedure push_middle
+            kopi <- middle.next
+            if start = null then
+                start <- ny
+                middle <- ny
+                end <- ny
+            middle.next = ny
+            ny.next = kopi
+            size ++
+
+        procedure get(i)
+            if i = 0 then
+                return start
+            tmp <- start
+            a <- 0
+            while a < i do
+                tmp = tmp.next
+                a++
+            return tmp
+
+
+    b) filnavn: Teque.java
+
+
+    c) Verste tilfelle av kjøretidsanalyse (uten begrensning av N):
+        push_back(x), push_front(x), push_middle(x):
+            konstanttid: O(1)
+        fordi: operasjonene kaller på noder med pekere på seg og trenger derfor ikke gå gjennom lista
+
+        get(x):
+            lineærtid: O(n)
+        fordi: hvis get metoden kaller på noe annet enn det første eller siste elementet, går metoden gjennom (nesten) hele lista til den finner elementet
+
+
+
+    d) Hvorfor størrelsen på N påvirker kjøretiden:
+        push_back(x), push_front(x), push_middle(x):
+            Operasjonene vil gå i konstanttid fordi det finnes peker til første, midterste og siste node. 
+            Derfor vil ikke operasjonene påvirkes av størrelsen på N (input) og derfor heller ikke lengden av køen (teque).
+
+        get(x):
+            Dersom det ikke er første eller siste node som skal hentes, vil kjøretiden økes lineært med input sin størrelse (N)
+            Dette er fordi metoden ble laget slik at den må lete gjennom alt i lista før den noden x man leter etter.
+            I verste tilfelle må get-metoden derfor lete gjennom hele lista (bortsett fra helt siste node)
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Oppgave3:
+
+
+    a)Pseudokode:
+        /*
+        antar at det finnes en klasse node med forelder og barnepekere
+        og en node kaldt rot (som er roten i treet)
+
+        endringer da det ble laget til kode:
+            måtte lagde selve barne-noden og legge til forelder 
+            finnBarn la til roten feil, så jeg lagde en ny metode som erstattet
+            deler av finn barn og hele settRot. Den nye metoden settRot sjekker
+            om det finnes noen barn av en foreldrenode (med samme verdi), dersom 
+            dette ikke er tilfelle må dette være roten.
+            måtte også gjøre om på printSti/finnVei slik at etter en forelder er funnet,
+            vil metoden finne tilsvarende barn i og videre den sin forelder
+        */
+
+        Procedure lesInput(linje)
+            kattPlassering = readLine()
+            linje(0) = kmd
+            if kmd = -1 then
+                return
+            ny = new Node(kmd)
+            foreldre.add(ny)
+            for(verdi: linje):
+                ny.barn.add(verdi)
+
+        Procedure settRot():
+            rot = finnBarn(foreldre.get(0))
+
+        Procedure finnBarn(x)
+            for(forelder: foreldre):
+                rot = forelder
+                for(barn: forelder):
+                    if(barn.verdi = x) then
+                        return barn
+            return forelder
+
+
+        Procedure finnVei(kattPlassering)
+            utvei = ""
+            if x = rot then:
+                utvei += x.veidi
+                return utvei
+            utvei += x.verdi
+            finnVei(x.forelder)
+
+
+    b) filnavn: Kattunge.java
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+Oppgave4: 
+    Filnavn: BalansertSoketre.java
+
+
+    a)Pseudokode:
+        /*
+        antar at metoden som leser input legger input i et array kalt tallListe
+        og et tomt array med like lange plasser som tallListe, bare at den er tom fra start
+
+        endret fra pseudokode til kode at metoden returnerte en string i stedet for å kun printe,
+        begge deler fungerte, men foretrakk at metoden returtnerte lista fordi da er det lettere
+        å hente frem og sjekke at elementene ligger der det skal
+        */
+
+        input: indeks av første og siste element i lista med input
+        output: en ny liste hvor elementene er sortert slik at treet vil bli balansert
+
+        //for å starte rekusjon
+        omOrganiser(0, tallListe.size-1, tallListe)
+
+        Procedure omOrganiser(lav, hoy, tallListe)
+            if lav = hoy then
+                return
+            midt <- (lav+hoy)/2
+            print(tallListe.get(midt))
+            omOrganiser(midt, tallListe.size-1, tallListe)
+            omOrganiser(0, midt, tallListe)
+
+
+    b) pseudokode:
+        /*
+        måtte justere basistilfellet fordi et heap kan ha lengde 0 uten å være null selv
+        fant også ut at poll fjernet første istedet for siste element.
+        justerte dette ved å endre slik at det midterste elementet blir lagt til i det største heapet
+        og ikke det minste.
+        */
+
+        input: et heap med heltall
+        output: printe elementene i en sortert rekkefølge slik at treet vil bli balanseert
+
+        Procedure OmOrganiserHeap(H){
+            if H = null then
+                return
+            midt <- (size-1) /2
+            teller <- 0
+            for tall: H do
+                if teller <= midt then
+                    lavHeap.offer(tall)
+                else
+                    hoyHeap.offer(tall)
+                teller ++
+            print(lavHeap.poll)
+            OmOrganiserHeap(lavHeap)
+            OmOrganiserHeap(hoyHeap)
+        }
+
+
+    Jeg vet ikke om jeg lagde filen som man ønsket i oppgaveteksten, men her er hvertfall sånn min kode fungerer:
+        1. kjør filen "BalansertSoketre.java" med en av testene "test.txt", "test2.txt" eller "test3.txt", koden vil lage to filer: "heapOutput.txt" og "tallOutput.txt"
+        2. kjør filen "BalanceChecker.java" med filen "heapOutput.txt" eller "tallOutput.txt" som input
+
