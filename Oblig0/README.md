@@ -1,5 +1,3 @@
-# IN2010: Algoritmer og datastrukturer / Algorithms and Data Structures
+# Innlevering 0 
 
-NORSK: Innleveringer fra UiO. Beskrivelse av emnet: "Dette emnet gir en innføring i grunnleggende algoritmer og datastrukturer. Det legges vekt på å forstå hvordan en rekke sentrale algoritmer og datastrukturer fungerer, samt å kunne resonnere rundt deres kjøretidseffektivitet. Emnet øver opp evnen til å løse problemer ved å finne egnede datastrukturer som gir opphav til effektive algoritmer."
-
-ENGLISH:  Assignements given at UiO. Description of the course from UiO website: "This course provides an introduction to fundamental algorithms and data structures. Emphasis is placed on understanding how a number of central algorithms and data structures work, as well as being able to reason about their runtime efficiency. The course develops the ability to solve problems by finding suitable data structures that give rise to efficient algorithms."
+Ineffektive mengder
